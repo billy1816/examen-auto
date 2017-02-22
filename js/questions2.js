@@ -5,10 +5,10 @@ var respuestasCheckbox = [];
 var nota = 0;  //nota de la prueba sobre 3 puntos (hay 3 preguntas)
 
 //**************************************************************************************************** 
-//DespuÈs de cargar la p·gina (onload) se definen los eventos sobre los elementos entre otras acciones.
+//Despu√©s de cargar la p√°gina (onload) se definen los eventos sobre los elementos entre otras acciones.
 window.onload = function(){ 
 
- //CORREGIR al apretar el botÛn
+ //CORREGIR al apretar el bot√≥n
  formElement=document.getElementById('myform');
  formElement.onsubmit=function(){
    inicializar();
@@ -39,13 +39,13 @@ function gestionarXml(dadesXml){
  var xmlDoc = dadesXml.responseXML; //Parse XML to xmlDoc
  
  //NUMBER
- //Recuperamos el tÌtulo y la respuesta correcta de Input, guardamos el n˙mero secreto
+ //Recuperamos el t√≠tulo y la respuesta correcta de Input, guardamos el n√∫mero secreto
  var tituloInput=xmlDoc.getElementsByTagName("title")[0].innerHTML;
  ponerDatosInputHtml(tituloInput);
  numeroSecreto=parseInt(xmlDoc.getElementsByTagName("answer")[0].innerHTML);
  
  //SELECT
- //Recuperamos el tÌtulo y las opciones, guardamos la respuesta correcta
+ //Recuperamos el t√≠tulo y las opciones, guardamos la respuesta correcta
  var tituloSelect=xmlDoc.getElementsByTagName("title")[1].innerHTML;
  var opcionesSelect = [];
  var nopt = xmlDoc.getElementById("profe_002").getElementsByTagName('option').length;
@@ -56,7 +56,7 @@ function gestionarXml(dadesXml){
  respuestaSelect=parseInt(xmlDoc.getElementsByTagName("answer")[1].innerHTML);
 
  //CHECKBOX
- //Recuperamos el tÌtulo y las opciones, guardamos las respuestas correctas
+ //Recuperamos el t√≠tulo y las opciones, guardamos las respuestas correctas
  var tituloCheckbox = xmlDoc.getElementsByTagName("title")[2].innerHTML;
  var opcionesCheckbox = [];
  var nopt = xmlDoc.getElementById("profe_003").getElementsByTagName('option').length;
@@ -71,11 +71,11 @@ function gestionarXml(dadesXml){
 }
 
 //****************************************************************************************************
-//implementaciÛn de la correcciÛn
+//implementaci√≥n de la correcci√≥n
 
 function corregirNumber(){
-  //Vosotros debÈis comparar el texto escrito con el texto que hay en el xml
-  //en este ejemplo hace una comparaciÛn de n˙meros enteros
+  //Vosotros deb√©is comparar el texto escrito con el texto que hay en el xml
+  //en este ejemplo hace una comparaci√≥n de n√∫meros enteros
   var s=formElement.elements[0].value;     
   if (s==numeroSecreto) {
    darRespuestaHtml("P1: Exacto!");
@@ -88,20 +88,20 @@ function corregirNumber(){
 }
 
 function corregirSelect(){
-  //Compara el Ìndice seleccionado con el valor del Ìncide que hay en el xml (<answer>2</answer>)
+  //Compara el √≠ndice seleccionado con el valor del √≠ncide que hay en el xml (<answer>2</answer>)
   //para implementarlo con type radio, usar value para enumerar las opciones <input type='radio' value='1'>...
   //luego comparar ese value con el value guardado en answer
   var sel = formElement.elements[1];  
-  if (sel.selectedIndex-1==respuestaSelect) { //-1 porque hemos puesto una opciÛn por defecto en el select que ocupa la posiciÛn 0
+  if (sel.selectedIndex-1==respuestaSelect) { //-1 porque hemos puesto una opci√≥n por defecto en el select que ocupa la posici√≥n 0
    darRespuestaHtml("P2: Correcto");
    nota +=1;
   }
   else darRespuestaHtml("P2: Incorrecto");
 }
 
-//Si necesit·is ayuda para hacer un corregirRadio() decirlo, lo ideal es que a pod·is construirla modificando corregirCheckbox
+//Si necesit√°is ayuda para hacer un corregirRadio() decirlo, lo ideal es que a pod√°is construirla modificando corregirCheckbox
 function corregirCheckbox(){
-  //Para cada opciÛn mira si est· checkeada, si est· checkeada mira si es correcta y lo guarda en un array escorrecta[]
+  //Para cada opci√≥n mira si est√° checkeada, si est√° checkeada mira si es correcta y lo guarda en un array escorrecta[]
   var f=formElement;
   var escorrecta = [];
   for (i = 0; i < f.color.length; i++) {  //"color" es el nombre asignado a todos los checkbox
@@ -112,10 +112,10 @@ function corregirCheckbox(){
     }
     //si es correcta sumamos y ponemos mensaje, si no es correcta restamos y ponemos mensaje.
     if (escorrecta[i]) {
-     nota +=1.0/respuestasCheckbox.length;  //dividido por el n˙mero de respuestas correctas   
+     nota +=1.0/respuestasCheckbox.length;  //dividido por el n√∫mero de respuestas correctas   
      darRespuestaHtml("P3: "+i+" correcta");    
     } else {
-     nota -=1.0/respuestasCheckbox.length;  //dividido por el n˙mero de respuestas correctas   
+     nota -=1.0/respuestasCheckbox.length;  //dividido por el n√∫mero de respuestas correctas   
      darRespuestaHtml("P3: "+i+" incorrecta");
     }   
    } 
@@ -157,7 +157,7 @@ function ponerDatosCheckboxHtml(t,opt){
 }
 
 //****************************************************************************************************
-//Gestionar la presentaciÛn de las respuestas
+//Gestionar la presentaci√≥n de las respuestas
 function darRespuestaHtml(r){
  var p = document.createElement("p");
  var node = document.createTextNode(r);
@@ -183,15 +183,15 @@ function comprobar(){
    }
    if (f.elements[0].value=="") {
     f.elements[0].focus();
-    alert("Escribe un n˙mero");
+    alert("Escribe un n√∫mero");
     return false;
    } else if (f.elements[1].selectedIndex==0) {
     f.elements[1].focus();
-    alert("Selecciona una opciÛn");
+    alert("Selecciona una opci√≥n");
     return false;
    } if (!checked) {    
     document.getElementsByTagName("h3")[2].focus();
-    alert("Selecciona una opciÛn del checkbox");
+    alert("Selecciona una opci√≥n del checkbox");
     return false;
    } else  return true;
 }
