@@ -28,12 +28,12 @@ function gestionarXml(dadesXml){
  
  function corregirNumber(){
  var s=formElement.elements[0].value;     
-  if (s==numeroSecreto) {
+  if (s==any) {
    darRespuestaHtml("P1: Exacto!");
    nota +=1;
   }
   else {
-    if (s>numeroSecreto) darRespuestaHtml("P1: Te has pasado");
+    if (s>any) darRespuestaHtml("P1: Te has pasado");
     else darRespuestaHtml("P1: Te has quedado corto");
   }
 }
